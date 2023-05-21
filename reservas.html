@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel de Administrador - Reservas y Gestión de Mesas</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link href='https://fonts.googleapis.com/css?family=Merienda' rel='stylesheet'>
+  <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    .custom-navbar {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+  <!---Start navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light custom-navbar">
+    <a class="navbar-brand">
+      <img src="images/logo.png" width="50" height="50" class="d-inline-block" alt=""> Sapori d'Italia
+    </a>
+    <!-- Resto del código de la barra de navegación -->
+  </nav>
+  <!--- End Navigation Bar -->
+
+  <div class="container">
+    <h2>Panel de Administrador - Reservas</h2>
+
+    <!-- Lista de reservas -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Número de Asistentes</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        // Obtener las reservas de la base de datos (requiere configuración y conexión a la base de datos)
+        $reservas = obtenerReservas();
+
+        foreach ($reservas as $reserva) {
+          echo "<tr>";
+          echo "<td>{$reserva['nombre']}</td>";
+          echo "<td>{$reserva['fecha']}</td>";
+          echo "<td>{$reserva['hora']}</td>";
+          echo "<td>{$reserva['num_invitados']}</td>";
+          echo "<td>{$reserva['email']}</td>";
+          echo "<td>{$reserva['telefono']}</td>";
+          echo "<td>";
+          echo "<a href='confirmar_reserva.php?id={$reserva['id']}' class='btn btn-success'>Confirmar</a>";
+          echo "<a href='denegar_reserva.php?id={$reserva['id']}' class='btn btn-danger'>Denegar</a>";
+          echo "</td>";
+          echo "</tr>";
+        }
+        ?>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+KvBtPhC8KdZ1f4EQs7xv+sqU0MIf5TqfEW2sPQ7U13w6pW" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
